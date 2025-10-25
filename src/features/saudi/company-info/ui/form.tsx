@@ -110,7 +110,10 @@ export function CompanyInfoForm({ form }: Props) {
         name="companyInfo.documentUploads"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-body-lg! font-semibold">
+            <FormLabel
+              htmlFor="file-control"
+              className="text-body-lg! font-semibold"
+            >
               제출 서류(Required Documents) *
             </FormLabel>
             <FormDescription className="text-body-sm! text-muted-foreground">
@@ -118,6 +121,7 @@ export function CompanyInfoForm({ form }: Props) {
             </FormDescription>
             <FormControl>
               <FileUploader
+                id="file-control"
                 value={field.value || []}
                 onChange={field.onChange}
                 onError={(message) => {
