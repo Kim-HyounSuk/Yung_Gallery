@@ -114,8 +114,10 @@ export function InterestAreaForm({ form }: Props) {
         name="interestArea.subitems"
         render={() => (
           <FormItem>
-            <FormLabel className="text-body-lg! font-semibold">
-              관심 분야별 필요 지원 및 서비스
+            <FormLabel asChild>
+              <legend className="text-body-lg! font-semibold">
+                관심 분야별 필요 지원 및 서비스 *
+              </legend>
             </FormLabel>
             <FormDescription className="text-muted-foreground">
               필요한 지원 및 서비스를 관심 분야별로 선택해주세요 (복수 선택
