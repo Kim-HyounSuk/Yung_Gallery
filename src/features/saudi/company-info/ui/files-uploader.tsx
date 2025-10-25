@@ -194,7 +194,7 @@ export function FileUploader({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isMaxReached || disabled}
-            className="mt-2 border-none px-(--px-md)! py-(--py-md)! font-semibold"
+            className="mt-2 border-none px-(--px-md) font-semibold"
           >
             <Download className="mr-2 h-4 w-4" />
             파일선택
@@ -214,7 +214,7 @@ export function FileUploader({
             </span>
           </p>
           <Button
-            className="bg-primary-foreground text-primary px-(--px-sm)! py-(--py-sm)! font-semibold"
+            className="bg-primary-foreground text-primary px-(--px-sm) font-semibold"
             type="button"
             variant="outline"
             size="sm"
@@ -254,9 +254,10 @@ export function FileUploader({
 
               {/* 삭제 버튼 */}
               <Button
+                className="hover:text-destructive hover:bg-inherit"
                 type="button"
                 variant="ghost"
-                size="icon"
+                size="icon-sm"
                 onClick={() => handleRemove(index)}
               >
                 <X className="h-4 w-4" />
