@@ -8,7 +8,7 @@ import {
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { Checkbox } from '@/shared/ui/checkbox'
-import { Tabs } from '@/shared/ui/custom'
+import { Tabs } from '@/shared/ui/custom/tabs'
 import {
   FormControl,
   FormDescription,
