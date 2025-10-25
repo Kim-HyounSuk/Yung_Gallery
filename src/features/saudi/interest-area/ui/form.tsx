@@ -21,7 +21,7 @@ import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
 import { SaudiFormData } from '@/widgets/saudi/model'
 import { X } from 'lucide-react'
-import { useRef, useState } from 'react'
+
 import { UseFormReturn } from 'react-hook-form'
 
 interface Props {
@@ -32,31 +32,6 @@ export function InterestAreaForm({ form }: Props) {
   const selAreas = form.watch('interestArea.areas') || []
   const selSubItems = form.watch('interestArea.subitems') || []
   const otherText = form.watch('interestArea.otherText') || ''
-
-  // TabList 드래그
-  const tabsListRef = useRef<HTMLDivElement>(null)
-  const [isDrag, setIsDrag] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [scrollLeft, setScrollLeft] = useState(0)
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!tabsListRef.current) return
-    setIsDrag(true)
-    setStartX(e.pageX - tabsListRef.current.offsetLeft)
-    setScrollLeft(tabsListRef.current.scrollLeft)
-  }
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDrag || !tabsListRef.current) return
-    e.preventDefault()
-    const x = e.pageX - tabsListRef.current.offsetLeft
-    const walk = x - startX
-    tabsListRef.current.scrollLeft = scrollLeft - walk
-  }
-
-  const handleMouseUpLeave = () => {
-    setIsDrag(false)
-  }
 
   const handleSubItemChage = (
     areaId: AreaId,
@@ -251,17 +226,22 @@ export function InterestAreaForm({ form }: Props) {
           </Button>
         </div>
         {selSubItems.length > 0 ? (
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col gap-4">
             {selSubItems.map((subItemId) => (
-              <Badge key={subItemId} className="px-(--px-sm)" variant="outline">
+              <Badge
+                key={subItemId}
+                className="px-0 pr-2 pl-4"
+                variant="outline"
+              >
                 <span className="text-primary text-body-sm">
                   {getSubItemLabel(subItemId)}
                 </span>
                 <Button
+                  className="hover:text-destructive hover:bg-inherit"
                   onClick={() => handleRemoveSubItems(subItemId)}
                   type="button"
                   variant="ghost"
-                  size="icon"
+                  size="icon-sm"
                 >
                   <X className="h-3 w-3" />
                 </Button>
