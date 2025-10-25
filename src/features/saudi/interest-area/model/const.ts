@@ -19,10 +19,14 @@ export const INTEREST_AREAS = {
       { id: 'saudi_bank_account', label: '사우디 내 기업은행 계좌개설 지원' },
     ],
   },
-  investment: {
-    id: 'investment',
-    label: '투자 및 자금조달',
-    subItems: [{ id: 'overseas_funding', label: '해외 확장 자금조달' }],
+  export: {
+    id: 'export',
+    label: '해외 유통 및 수출',
+    subItems: [
+      { id: 'export_declaration', label: '수출신고 및 통관' },
+      { id: 'local_distribution', label: '물류 및 현지유통' },
+      { id: 'local_marketing', label: '현지 마케팅 및 유통망 개척' },
+    ],
   },
   incubator: {
     id: 'incubator',
