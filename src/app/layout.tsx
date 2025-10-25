@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-background text-body-md bg-[url(/images/wave.svg)] bg-cover bg-center bg-no-repeat">
         {children}
+        <Toaster position="top-center" />
       </body>
     </html>
   )
