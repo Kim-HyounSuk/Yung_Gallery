@@ -230,10 +230,10 @@ export function InterestAreaForm({ form }: Props) {
             {selSubItems.map((subItemId) => (
               <Badge
                 key={subItemId}
-                className="px-0 pr-2 pl-4"
+                className="max-w-full px-0 pr-2 pl-4"
                 variant="outline"
               >
-                <span className="text-primary text-body-sm">
+                <span className="text-primary text-body-sm min-w-0 truncate">
                   {getSubItemLabel(subItemId)}
                 </span>
                 <Button
