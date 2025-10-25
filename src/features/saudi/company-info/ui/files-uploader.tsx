@@ -11,6 +11,7 @@ import { CheckCircle2, Download, Loader2, X } from 'lucide-react'
 import { useRef, useState } from 'react'
 
 interface Props {
+  id?: string
   value: FileDoc[]
   onChange: (files: FileDoc[]) => void
   onError: (msg: string) => void
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export function FileUploader({
+  id,
   value = [],
   onChange,
   onError,
@@ -188,6 +190,7 @@ export function FileUploader({
             disabled={isMaxReached || disabled}
           />
           <Button
+            id={id}
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isMaxReached || disabled}
