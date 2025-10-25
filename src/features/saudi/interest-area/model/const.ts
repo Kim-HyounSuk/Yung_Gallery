@@ -3,7 +3,7 @@ export const INTEREST_AREAS = {
     id: 'partnership',
     label: '파트너십',
     subItems: [
-      { id: 'government_cooperation', label: '정부협력' },
+      { id: 'government_cooperation', label: '정부 협력' },
       { id: 'business_cooperation', label: '기업간 협력' },
     ],
   },
@@ -11,7 +11,7 @@ export const INTEREST_AREAS = {
     id: 'license',
     label: '라이센스',
     subItems: [
-      { id: 'legal_permit', label: '법적허가' },
+      { id: 'legal_permit', label: '법적 허가' },
       { id: 'legal_service_provider', label: '법률 서비스 제공자 연결' },
       { id: 'regulatory_access', label: '규제기관 접근' },
       { id: 'saudi_corporation_support', label: '사우디 내 법인 설립지원' },
