@@ -1,0 +1,11 @@
+export const FORM_STEPS = {
+  COMPANY_INFO: 0,
+  INTEREST_AREA: 1,
+  ADDITIONAL: 2,
+}
+
+export const FORM_STEP_TITLES = {
+  [FORM_STEPS.COMPANY_INFO]: '회사 정보',
+  [FORM_STEPS.INTEREST_AREA]: '관심 분야',
+  [FORM_STEPS.ADDITIONAL]: '추가 정보',
+}
