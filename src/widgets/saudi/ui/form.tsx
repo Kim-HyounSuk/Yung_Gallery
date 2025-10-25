@@ -1,7 +1,21 @@
 'use client'
 
+import { AdditionalFormSchema } from '@/features/saudi/additional/model'
+import { AdditionalForm } from '@/features/saudi/additional/ui'
+import { CompanyInfoFormSchema } from '@/features/saudi/company-info/model'
 import { CompanyInfoForm } from '@/features/saudi/company-info/ui'
-import { InterestAreaForm } from '@/features/saudi/interest-area/ui/form'
+import { InterestAreaFormSchema } from '@/features/saudi/interest-area/model'
+import { InterestAreaForm } from '@/features/saudi/interest-area/ui'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+} from '@/shared/ui/alert-dialog'
 import { Button } from '@/shared/ui/button'
 import { Form } from '@/shared/ui/form'
 import {
@@ -10,13 +24,15 @@ import {
   SaudiFormSchema,
 } from '@/widgets/saudi/model'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AlertDialogTitle } from '@radix-ui/react-alert-dialog'
 import clsx from 'clsx'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
+import { DeepPartial, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 export function SaudiForm() {
   const [curStep, setCurStep] = useState(FORM_STEPS.COMPANY_INFO)
+  const [isStepValid, setIsStepValid] = useState(false)
   const [isSubmit, setIsSubmit] = useState(false)
 
   const form = useForm<SaudiFormData>({
@@ -37,24 +53,37 @@ export function SaudiForm() {
     mode: 'onChange',
   })
 
-  const validateCurStep = async () => {
-    let isStepValid = false
+  useEffect(() => {
+    const validateStep = (values: DeepPartial<SaudiFormData>) => {
+      let result
 
-    switch (curStep) {
-      case FORM_STEPS.COMPANY_INFO:
-        isStepValid = await form.trigger('companyInfo')
-        break
-      case FORM_STEPS.INTEREST_AREA:
-        isStepValid = await form.trigger('interestArea')
-        break
+      switch (curStep) {
+        case FORM_STEPS.COMPANY_INFO:
+          result = CompanyInfoFormSchema.safeParse(values.companyInfo)
+          break
+        case FORM_STEPS.INTEREST_AREA:
+          result = InterestAreaFormSchema.safeParse(values.interestArea)
+          break
+        case FORM_STEPS.ADDITIONAL:
+          result = AdditionalFormSchema.safeParse(values.additional)
+          break
+        default:
+          result = { success: false }
+      }
+
+      setIsStepValid(result.success)
     }
 
-    return isStepValid
-  }
+    const subscription = form.watch((values) => {
+      validateStep(values)
+    })
+
+    validateStep(form.getValues())
+
+    return () => subscription.unsubscribe()
+  }, [form, curStep])
 
   const handleNext = async () => {
-    const isStepValid = await validateCurStep()
-
     if (isStepValid) {
       setCurStep((prev) => Math.min(prev + 1, FORM_STEPS.ADDITIONAL))
     }
@@ -64,27 +93,30 @@ export function SaudiForm() {
   }
 
   const onSubmit = async (data: SaudiFormData) => {
-    setIsSubmit(true)
+    console.log(data)
 
-    try {
-      const res = await fetch('/api/business-in-saudi/apply', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+    toast.success('성공적으로 제출되었습니다.')
 
-      if (!res.ok) {
-        throw new Error('제출에 실패했습니다')
-      }
-
-      toast.success('성공적으로 제출되었습니다.')
-    } catch (error) {
-      toast.error((error as Error).message || '제출 중 오류가 발생했습니다.')
-    } finally {
-      setIsSubmit(false)
-    }
+    form.reset()
+    setCurStep(FORM_STEPS.COMPANY_INFO)
+    // setIsSubmit(true)
+    // try {
+    //   const res = await fetch('/api/business-in-saudi/apply', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(data),
+    //   })
+    //   if (!res.ok) {
+    //     throw new Error('제출에 실패했습니다')
+    //   }
+    //   toast.success('성공적으로 제출되었습니다.')
+    // } catch (error) {
+    //   toast.error((error as Error).message || '제출 중 오류가 발생했습니다.')
+    // } finally {
+    //   setIsSubmit(false)
+    // }
   }
 
   const renderStep = () => {
@@ -93,6 +125,8 @@ export function SaudiForm() {
         return <CompanyInfoForm form={form} />
       case FORM_STEPS.INTEREST_AREA:
         return <InterestAreaForm form={form} />
+      case FORM_STEPS.ADDITIONAL:
+        return <AdditionalForm form={form} />
       default:
         return null
     }
@@ -137,39 +171,76 @@ export function SaudiForm() {
 
       {/* 컨텐츠 영역 */}
       <Form {...form}>
-        <form className="z-10">{renderStep()}</form>
+        <form
+          id="multi-step-form"
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="z-10"
+        >
+          {renderStep()}
+        </form>
       </Form>
 
-      <div className="z-10 flex flex-1 justify-between px-4 md:px-[50px]">
-        <Button
-          className="text-body-lg! px-(--px-lg)! py-(--py-lg)! font-semibold"
-          type="button"
-          size="lg"
-          variant="outline"
-          onClick={handlePrev}
-          disabled={curStep === FORM_STEPS.COMPANY_INFO}
-        >
-          이전
-        </Button>
-
-        {curStep === FORM_STEPS.ADDITIONAL ? (
+      <div className="z-10 flex flex-1 flex-col gap-6 px-4 md:px-[50px]">
+        <div className="flex items-center justify-between">
           <Button
-            className="text-body-lg! px-(--px-lg)! py-(--py-lg)! font-semibold"
+            className="text-body-lg! px-(--px-lg) font-semibold"
+            type="button"
             size="lg"
-            type="submit"
-            disabled={isSubmit}
+            variant="outline"
+            onClick={handlePrev}
+            disabled={curStep === FORM_STEPS.COMPANY_INFO}
           >
-            {isSubmit ? '제출 중...' : '제출하기'}
+            이전
           </Button>
-        ) : (
           <Button
-            className="text-body-lg! px-(--px-lg)! py-(--py-lg)! font-semibold"
+            className="text-body-lg! px-(--px-lg) font-semibold"
             size="lg"
             type="button"
+            variant={curStep === FORM_STEPS.ADDITIONAL ? 'outline' : 'default'}
             onClick={handleNext}
+            disabled={!isStepValid || curStep === FORM_STEPS.ADDITIONAL}
           >
             다음
           </Button>
+        </div>
+
+        {curStep === FORM_STEPS.ADDITIONAL && (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                className="text-body-lg! h-(--h-md) px-(--px-lg) py-(--py-lg) font-semibold"
+                size="lg"
+                type="button"
+                disabled={!form.formState.isValid || isSubmit}
+              >
+                {isSubmit ? '제출 중...' : '제출하기 (Submit)'}
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle className="text-body-lg font-semibold">
+                  개인정보 제공 및 활용 동의(Consent) *
+                </AlertDialogTitle>
+                <AlertDialogDescription className="text-body-md text-foreground break-keep">
+                  본 양식을 제출하는 것은 제공된 정보, 개인 데이터 및 문서의
+                  정확성을{' '}
+                  <span className="font-semibold">인정함과 동시에</span>,
+                  프로그램의{' '}
+                  <span className="font-semibold">
+                    협업 및 파트너십을 촉진할
+                  </span>
+                  목적으로 이를 관련 제3자와 공유하는데 동의하는 것으로{' '}
+                  <span className="font-semibold">간주 됩니다</span>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>거부</AlertDialogCancel>
+                <AlertDialogAction type="submit" form="multi-step-form">
+                  동의 및 제출
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         )}
       </div>
 
