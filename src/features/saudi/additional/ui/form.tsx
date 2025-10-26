@@ -1,5 +1,6 @@
 'use client'
 
+import { SaudiFormData } from '@/entities/application/model'
 import {
   CUR_FUND_STAGE,
   EXPECT_TIMELINE,
@@ -13,7 +14,6 @@ import {
 } from '@/shared/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/shared/ui/radio-group'
 import { Textarea } from '@/shared/ui/textarea'
-import { SaudiFormData } from '@/widgets/saudi/model'
 import { UseFormReturn } from 'react-hook-form'
 
 interface Props {

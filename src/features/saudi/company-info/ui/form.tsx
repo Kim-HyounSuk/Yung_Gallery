@@ -1,5 +1,6 @@
 'use client'
 
+import { SaudiFormData } from '@/entities/application/model'
 import {
   MAX_FILE_SIZE,
   MAX_TOTAL_SIZE,
@@ -14,7 +15,6 @@ import {
   FormMessage,
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
-import { SaudiFormData } from '@/widgets/saudi/model'
 import { UseFormReturn } from 'react-hook-form'
 
 interface Props {

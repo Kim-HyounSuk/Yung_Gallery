@@ -1,5 +1,6 @@
 'use client'
 
+import { SaudiFormData } from '@/entities/application/model'
 import {
   AreaId,
   INTEREST_AREAS,
@@ -19,7 +20,6 @@ import {
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
-import { SaudiFormData } from '@/widgets/saudi/model'
 import { X } from 'lucide-react'
 
 import { UseFormReturn } from 'react-hook-form'
