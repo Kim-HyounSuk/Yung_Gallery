@@ -20,7 +20,7 @@ interface Props {
   form: UseFormReturn<SaudiFormData>
 }
 
-export function AdditionalForm({ form }: Props) {
+export function AdditionalStep({ form }: Props) {
   return (
     <div className="flex flex-col gap-8 p-4 md:px-[50px]">
       <FormField

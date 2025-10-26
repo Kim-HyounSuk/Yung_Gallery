@@ -1,2 +1,2 @@
+export * from './company-info-step'
 export * from './files-uploader'
-export * from './form'

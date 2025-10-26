@@ -4,7 +4,7 @@ import {
 } from '@/features/saudi/steps/additional/model'
 import z from 'zod'
 
-export const AdditionalFormSchema = z.object({
+export const AdditionalStepSchema = z.object({
   expectTimeline: z.enum(EXPECT_TIMELINE, {
     message: '예상 시기를 선택하세요',
   }),
@@ -14,4 +14,4 @@ export const AdditionalFormSchema = z.object({
   comment: z.string().optional(),
 })
 
-export type AdditionalFormData = z.infer<typeof AdditionalFormSchema>
+export type AdditionalStepData = z.infer<typeof AdditionalStepSchema>

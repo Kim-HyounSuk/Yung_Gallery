@@ -21,7 +21,7 @@ interface Props {
   form: UseFormReturn<SaudiFormData>
 }
 
-export function CompanyInfoForm({ form }: Props) {
+export function CompanyInfoStep({ form }: Props) {
   return (
     <div className="flex flex-col gap-8 p-4 md:px-[50px]">
       <FormField

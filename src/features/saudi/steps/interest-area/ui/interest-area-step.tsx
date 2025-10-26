@@ -28,7 +28,7 @@ interface Props {
   form: UseFormReturn<SaudiFormData>
 }
 
-export function InterestAreaForm({ form }: Props) {
+export function InterestAreaStep({ form }: Props) {
   const selAreas = form.watch('interestArea.areas') || []
   const selSubItems = form.watch('interestArea.subitems') || []
   const otherText = form.watch('interestArea.otherText') || ''

@@ -1,6 +1,6 @@
 import z from 'zod'
 
-export const InterestAreaFormSchema = z
+export const InterestAreaStepSchema = z
   .object({
     areas: z
       .array(z.string())
@@ -24,4 +24,4 @@ export const InterestAreaFormSchema = z
     },
   )
 
-export type InterestAreaFormData = z.infer<typeof InterestAreaFormSchema>
+export type InterestAreaStepData = z.infer<typeof InterestAreaStepSchema>

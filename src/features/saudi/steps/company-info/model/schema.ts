@@ -1,6 +1,6 @@
 import z from 'zod'
 
-export const CompanyInfoFormSchema = z.object({
+export const CompanyInfoStepSchema = z.object({
   companyName: z.string().min(1, '회사명은 필수 항목입니다'),
   managerName: z.string().min(1, '담당자명은 필수 항목입니다'),
   managerEmail: z.string().email('올바른 이메일 형식이 아닙니다'),
@@ -27,4 +27,4 @@ export const CompanyInfoFormSchema = z.object({
     ),
 })
 
-export type CompanyInfoFormData = z.infer<typeof CompanyInfoFormSchema>
+export type CompanyInfoStepData = z.infer<typeof CompanyInfoStepSchema>
