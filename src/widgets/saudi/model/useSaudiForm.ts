@@ -1,3 +1,5 @@
+'use client'
+
 import { SaudiFormData, SaudiFormSchema } from '@/entities/application/model'
 import { AdditionalFormSchema } from '@/features/saudi/steps/additional/model'
 import { CompanyInfoFormSchema } from '@/features/saudi/steps/company-info/model'
@@ -11,6 +13,7 @@ export function useSaudiForm() {
   const [curStep, setCurStep] = useState(FORM_STEPS.COMPANY_INFO)
   const [isStepValid, setIsStepValid] = useState(false)
 
+  // 폼 메서드 정의 및 초기화
   const form = useForm<SaudiFormData>({
     resolver: zodResolver(SaudiFormSchema),
     defaultValues: {
@@ -24,6 +27,7 @@ export function useSaudiForm() {
       interestArea: {
         areas: [],
         subitems: [],
+        otherText: '',
       },
     },
     mode: 'onChange',
@@ -61,14 +65,16 @@ export function useSaudiForm() {
   }, [form, curStep])
 
   // 네비게이션 버튼 핸들러
-  const handleNext = async () => {
+  const handleNext = () => {
     if (isStepValid) {
       setCurStep((prev) => Math.min(prev + 1, FORM_STEPS.ADDITIONAL))
     }
   }
-  const handlePrev = async () => {
+  const handlePrev = () => {
     setCurStep((prev) => Math.max(prev - 1, FORM_STEPS.COMPANY_INFO))
   }
 
-  return { form, curStep, isStepValid, handleNext, handlePrev }
+  const resetCurStep = () => setCurStep(FORM_STEPS.COMPANY_INFO)
+
+  return { form, curStep, isStepValid, handleNext, handlePrev, resetCurStep }
 }
