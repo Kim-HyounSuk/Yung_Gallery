@@ -4,7 +4,7 @@ import { SaudiFormData } from '@/entities/application/model'
 import {
   CUR_FUND_STAGE,
   EXPECT_TIMELINE,
-} from '@/features/saudi/additional/model'
+} from '@/features/saudi/steps/additional/model'
 import {
   FormControl,
   FormField,

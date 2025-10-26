@@ -4,8 +4,8 @@ import { SaudiFormData } from '@/entities/application/model'
 import {
   MAX_FILE_SIZE,
   MAX_TOTAL_SIZE,
-} from '@/features/saudi/company-info/model'
-import { FileUploader } from '@/features/saudi/company-info/ui'
+} from '@/features/saudi/steps/company-info/model'
+import { FileUploader } from '@/features/saudi/steps/company-info/ui'
 import {
   FormControl,
   FormDescription,

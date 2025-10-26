@@ -1,7 +1,7 @@
 import {
   CUR_FUND_STAGE,
   EXPECT_TIMELINE,
-} from '@/features/saudi/additional/model'
+} from '@/features/saudi/steps/additional/model'
 import z from 'zod'
 
 export const AdditionalFormSchema = z.object({

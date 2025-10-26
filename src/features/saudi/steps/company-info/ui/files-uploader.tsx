@@ -5,7 +5,7 @@ import {
   FileDoc,
   MAX_FILE_SIZE,
   MAX_TOTAL_SIZE,
-} from '@/features/saudi/company-info/model'
+} from '@/features/saudi/steps/company-info/model'
 import { Button } from '@/shared/ui/button'
 import { CheckCircle2, Download, Loader2, X } from 'lucide-react'
 import { useRef, useState } from 'react'

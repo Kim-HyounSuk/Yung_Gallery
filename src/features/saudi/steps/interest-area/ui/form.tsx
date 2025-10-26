@@ -5,7 +5,7 @@ import {
   AreaId,
   INTEREST_AREAS,
   SubItemId,
-} from '@/features/saudi/interest-area/model'
+} from '@/features/saudi/steps/interest-area/model'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { Checkbox } from '@/shared/ui/checkbox'
