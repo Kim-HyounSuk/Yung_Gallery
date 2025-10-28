@@ -5,7 +5,6 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit" // 추가: import 자동 정렬
   },
-  "typescript.preferences.importModuleSpecifier": "non-relative", // 절대 경로 우선
   "typescript.preferences.includePackageJsonAutoImports": "on", // 자동 import 개선
   "typescript.suggest.autoImports": true, // 자동 import 활성화
   "emmet.includeLanguages": {
