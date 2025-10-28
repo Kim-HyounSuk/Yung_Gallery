@@ -38,6 +38,7 @@ export const businessInSaudiConfig: FormConfig = {
     interestArea: {
       areas: [],
       subitems: [],
+      otherText: '',
     },
   },
 }
