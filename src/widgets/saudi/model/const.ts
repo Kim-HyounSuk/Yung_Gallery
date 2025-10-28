@@ -1,5 +1,0 @@
-export const FORM_STEPS = {
-  COMPANY_INFO: 0,
-  INTEREST_AREA: 1,
-  ADDITIONAL: 2,
-}
