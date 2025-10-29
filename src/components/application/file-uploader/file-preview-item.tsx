@@ -18,7 +18,7 @@ export function FilePreviewItem({
   formatFileSize,
 }: Props) {
   return (
-    <div className="hover:bg-point-50 border-ring flex items-center justify-between rounded-lg border bg-white p-4 transition-colors">
+    <div className="hover:bg-point-50 border-ring flex items-center justify-between rounded-lg border bg-inherit p-4 transition-colors">
       <div className="flex min-w-0 flex-1 items-center">
         {/* 상태 아이콘 */}
         <div className="mr-3 shrink-0">

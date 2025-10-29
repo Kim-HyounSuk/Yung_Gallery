@@ -36,7 +36,8 @@ export function InterestAreaStep() {
           <FormItem>
             <FormLabel asChild>
               <legend className="text-body-lg! font-semibold">
-                관심 분야별 필요 지원 및 서비스 *
+                관심 분야별 필요 지원 및 서비스{' '}
+                <span className="text-destructive">*</span>
               </legend>
             </FormLabel>
             <FormDescription className="text-muted-foreground">

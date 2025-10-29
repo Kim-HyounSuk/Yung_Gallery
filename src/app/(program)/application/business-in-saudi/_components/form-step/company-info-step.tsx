@@ -25,7 +25,7 @@ export function CompanyInfoStep() {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-body-lg! font-semibold">
-              회사명(Company Name) *
+              회사명(Company Name) <span className="text-destructive">*</span>
             </FormLabel>
             <FormControl>
               <Input
@@ -45,7 +45,8 @@ export function CompanyInfoStep() {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-body-lg! font-semibold">
-              담당자 성명(Manager Name) *
+              담당자 성명(Manager Name){' '}
+              <span className="text-destructive">*</span>
             </FormLabel>
             <FormControl>
               <Input
@@ -65,7 +66,8 @@ export function CompanyInfoStep() {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-body-lg! font-semibold">
-              업무용 Email(Work Email) *
+              업무용 Email(Work Email){' '}
+              <span className="text-destructive">*</span>
             </FormLabel>
             <FormControl>
               <Input
@@ -86,7 +88,8 @@ export function CompanyInfoStep() {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-body-lg! font-semibold">
-              설립 연도(Year of Business Incorporation) *
+              설립 연도(Year of Business Incorporation){' '}
+              <span className="text-destructive">*</span>
             </FormLabel>
             <FormControl>
               <Input
@@ -106,10 +109,16 @@ export function CompanyInfoStep() {
         render={({ field }) => (
           <FormItem>
             <FormLabel asChild className="text-body-lg! font-semibold">
-              <legend>제출 서류(Required Documents) *</legend>
+              <legend>
+                제출 서류(Required Documents){' '}
+                <span className="text-destructive">*</span>
+              </legend>
             </FormLabel>
             <FormDescription className="text-body-sm! text-muted-foreground">
-              (회사 소개서, 전년도 매출 증빙)
+              회사 소개서, 전년도 매출 증빙{' '}
+              <span className="text-destructive font-semibold">
+                (누락시 진행이 불가합니다)
+              </span>
             </FormDescription>
             <FormControl>
               <FileUploader

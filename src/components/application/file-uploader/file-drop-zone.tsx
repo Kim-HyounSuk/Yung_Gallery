@@ -45,7 +45,7 @@ export function FileDropZone({
       } ${isMaxReached || disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
     >
       <div className="flex flex-col items-center justify-center px-6 py-12">
-        <Download className="mb-4 h-12 w-12 text-gray-400" />
+        <Download className="text-muted-foreground mb-4 h-12 w-12" />
         <p className="text-body-sm text-muted-foreground mb-4 text-center">
           PDF, 이미지(JPG, PNG), Word 문서 <br />
           (최소 1개, 최대 {maxFiles}개, 각 파일 최대{' '}
