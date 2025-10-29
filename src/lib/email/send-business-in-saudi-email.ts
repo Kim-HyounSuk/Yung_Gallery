@@ -31,7 +31,10 @@ export async function sendBusinessInSaudiEmail(
 
     const selectedSubItems = formData.interestArea.subitems.map((subItemId) => {
       // 기타 항목인 경우 사용자가 입력한 텍스트 반환
-      if (subItemId === 'other_custom' && formData.interestArea.otherText) {
+      if (
+        subItemId === INTEREST_AREAS.other.subItems[0].id &&
+        formData.interestArea.otherText
+      ) {
         return formData.interestArea.otherText
       }
 

@@ -13,7 +13,7 @@ export function getSubItemLabel(
 
     if (subItem) {
       // 기타 항목이고 직접 입력한 텍스트가 있으면
-      if (subItemId === 'other_custom' && otherText) {
+      if (subItemId === INTEREST_AREAS.other.subItems[0].id && otherText) {
         return `${area.label} > ${otherText}`
       }
 

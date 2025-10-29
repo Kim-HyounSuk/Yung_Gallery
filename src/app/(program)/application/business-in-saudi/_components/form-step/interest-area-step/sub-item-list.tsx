@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { INTEREST_AREAS } from '@/const/application/business-in-saudi'
 import {
   AreaId,
   BusinessInSaudiFormData,
@@ -33,7 +34,9 @@ export function SubItemList({
   onSubItemChange,
 }: Props) {
   const { control } = useFormContext<BusinessInSaudiFormData>()
-  const isOtherSelected = selectedSubItems.includes('other_custom')
+  const isOtherSelected = selectedSubItems.includes(
+    INTEREST_AREAS.other.subItems[0].id,
+  )
 
   return (
     <div className="flex flex-col gap-4">
@@ -55,8 +58,8 @@ export function SubItemList({
           </Label>
 
           {/* 기타 항목 직접입력 */}
-          {area.id === 'other' &&
-            subItem.id === 'other_custom' &&
+          {area.id === INTEREST_AREAS.other.id &&
+            subItem.id === INTEREST_AREAS.other.subItems[0].id &&
             isOtherSelected && (
               <FormField
                 control={control}

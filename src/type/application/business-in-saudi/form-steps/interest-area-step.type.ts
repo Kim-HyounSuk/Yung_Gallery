@@ -3,7 +3,7 @@ export type AreaId =
   | 'license'
   | 'export'
   | 'incubator'
-  | 'dammam_mall'
+  | 'khovar_mall'
   | 'business_service'
   | 'other'
 export type SubItemId = string

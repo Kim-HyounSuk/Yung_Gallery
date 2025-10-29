@@ -24,8 +24,6 @@ export function useSubmitApplication(config: FormConfig) {
       // 파일을 제외한 데이터를 JSON으로 직렬화
       const dataToSend = { ...formValues }
 
-      // 파일은 base64로 그대로 서버에 전송 (서버에서 변환 처리)
-
       // JSON 데이터를 FormData에 추가
       formData.append('data', JSON.stringify(dataToSend))
 
