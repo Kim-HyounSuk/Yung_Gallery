@@ -1,6 +1,13 @@
 'use client'
 
-import { createContext, ReactNode, useContext, useRef, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 interface TabsContextValue {
   activeTab: string
@@ -10,6 +17,10 @@ interface TabsContextValue {
   handleMouseDown: (e: React.MouseEvent) => void
   handleMouseMove: (e: React.MouseEvent) => void
   handleMouseUpOrLeave: () => void
+  showLeftArrow: boolean
+  showRightArrow: boolean
+  scrollToLeft: () => void
+  scrollToRight: () => void
 }
 
 const TabsContext = createContext<TabsContextValue | undefined>(undefined)
@@ -34,6 +45,34 @@ export function TabsProvider({ children, defaultValue }: TabsProviderProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
+  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showRightArrow, setShowRightArrow] = useState(false)
+
+  const checkScroll = () => {
+    if (!tabsListRef.current) return
+    const { scrollLeft, scrollWidth, clientWidth } = tabsListRef.current
+    setShowLeftArrow(scrollLeft > 0)
+    setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 1)
+  }
+
+  useEffect(() => {
+    const element = tabsListRef.current
+    if (!element) return
+
+    checkScroll()
+
+    const resizeObserver = new ResizeObserver(() => {
+      checkScroll()
+    })
+
+    resizeObserver.observe(element)
+    element.addEventListener('scroll', checkScroll)
+
+    return () => {
+      resizeObserver.disconnect()
+      element.removeEventListener('scroll', checkScroll)
+    }
+  }, [])
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!tabsListRef.current) return
@@ -54,6 +93,18 @@ export function TabsProvider({ children, defaultValue }: TabsProviderProps) {
     setIsDragging(false)
   }
 
+  const scrollToLeft = () => {
+    if (!tabsListRef.current) return
+    tabsListRef.current.scrollBy({ left: -200, behavior: 'smooth' })
+    setTimeout(checkScroll, 300)
+  }
+
+  const scrollToRight = () => {
+    if (!tabsListRef.current) return
+    tabsListRef.current.scrollBy({ left: 200, behavior: 'smooth' })
+    setTimeout(checkScroll, 300)
+  }
+
   return (
     <TabsContext.Provider
       value={{
@@ -64,6 +115,10 @@ export function TabsProvider({ children, defaultValue }: TabsProviderProps) {
         handleMouseDown,
         handleMouseMove,
         handleMouseUpOrLeave,
+        showLeftArrow,
+        showRightArrow,
+        scrollToLeft,
+        scrollToRight,
       }}
     >
       {children}

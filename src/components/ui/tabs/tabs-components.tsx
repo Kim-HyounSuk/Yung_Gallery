@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { ArrowBigLeft, ArrowBigRight } from 'lucide-react'
 import { ReactNode } from 'react'
 import { TabsProvider, useTabs } from './tabs-context'
 
@@ -29,21 +30,47 @@ export function TabsList({ children, className }: TabsListProps) {
     handleMouseDown,
     handleMouseMove,
     handleMouseUpOrLeave,
+    showLeftArrow,
+    showRightArrow,
+    scrollToLeft,
+    scrollToRight,
   } = useTabs()
 
   return (
-    <div
-      ref={tabsListRef}
-      className={cn(
-        'scroll-hide border-y-muted flex w-full cursor-grab gap-1 overflow-x-auto border-y bg-inherit py-2 select-none active:cursor-grabbing',
-        className,
+    <div className="relative">
+      {showLeftArrow && (
+        <button
+          type="button"
+          onClick={scrollToLeft}
+          className="bg-primary text-primary-foreground absolute top-1/2 left-0 z-10 flex -translate-y-1/2 items-center justify-center rounded-full p-1.5 opacity-50 hover:opacity-100"
+          aria-label="Scroll left"
+        >
+          <ArrowBigLeft className="animate-slide-left h-5 w-5" />
+        </button>
       )}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUpOrLeave}
-      onMouseLeave={handleMouseUpOrLeave}
-    >
-      {children}
+      <div
+        ref={tabsListRef}
+        className={cn(
+          'scroll-hide border-y-muted flex w-full cursor-grab gap-1 overflow-x-auto border-y bg-inherit py-2 select-none active:cursor-grabbing',
+          className,
+        )}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
+      >
+        {children}
+      </div>
+      {showRightArrow && (
+        <button
+          type="button"
+          onClick={scrollToRight}
+          className="bg-primary text-primary-foreground absolute top-1/2 right-0 z-10 flex -translate-y-1/2 items-center justify-center rounded-full p-1.5 opacity-50 hover:opacity-100"
+          aria-label="Scroll right"
+        >
+          <ArrowBigRight className="animate-slide-right h-5 w-5" />
+        </button>
+      )}
     </div>
   )
 }
