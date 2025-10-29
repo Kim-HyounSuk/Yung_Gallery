@@ -1,3 +1,4 @@
+import { INTEREST_AREAS } from '@/const/application/business-in-saudi'
 import { z } from 'zod'
 
 export const interestAreaStepSchema = z
@@ -12,7 +13,7 @@ export const interestAreaStepSchema = z
   })
   .refine(
     (data) => {
-      if (data.subitems.includes('other_custom')) {
+      if (data.subitems.includes(INTEREST_AREAS.other.subItems[0].id)) {
         return data.otherText && data.otherText.trim().length > 0
       }
 
