@@ -3,8 +3,8 @@ import { Toaster } from 'sonner'
 import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'Yung Gallery - Business in Saudi',
-  description: 'Business in Saudi 지원 페이지',
+  title: 'Yung Global',
+  description: `Yung Global's 비즈니스 프로그램 신청 페이지`,
 }
 
 export default function RootLayout({

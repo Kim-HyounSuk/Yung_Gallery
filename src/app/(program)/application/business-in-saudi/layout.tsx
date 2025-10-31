@@ -1,3 +1,10 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Yung Global | Business in Saudi 프로그램 지원',
+  description: `Yung Global's Business in Saudi 프로그램 신청 페이지`,
+}
+
 interface Props {
   children: React.ReactNode
 }
