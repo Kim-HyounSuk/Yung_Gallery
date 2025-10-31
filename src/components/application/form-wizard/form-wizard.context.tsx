@@ -1,9 +1,16 @@
 'use client'
 
 import { Form } from '@/components/ui/form'
+import { usePreviewStore } from '@/store/application'
 import { FormConfig, FormData, FormStep } from '@/type/application'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createContext, useCallback, useContext, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react'
 import { useForm } from 'react-hook-form'
 
 interface FormWizardContextValue {
@@ -16,6 +23,7 @@ interface FormWizardContextValue {
   isFirstStep: boolean
   isLastStep: boolean
   getFormValues: () => FormData
+  restoreFormData: () => void
 }
 
 const FormWizardContext = createContext<FormWizardContextValue | null>(null)
@@ -37,9 +45,15 @@ export function FormWizardProvider({
   config,
   children,
 }: FormWizardProviderProps) {
+  const { formData: storedFormData } = usePreviewStore()
+
+  const defaultValues = useMemo(() => {
+    return storedFormData || config.defaultValues
+  }, [storedFormData, config.defaultValues])
+
   const form = useForm({
     resolver: zodResolver(config.schema),
-    defaultValues: config.defaultValues,
+    defaultValues,
     mode: 'onChange',
   })
 
@@ -77,6 +91,12 @@ export function FormWizardProvider({
     [config.steps.length],
   )
 
+  const restoreFormData = useCallback(() => {
+    if (storedFormData) {
+      form.reset(storedFormData)
+    }
+  }, [form, storedFormData])
+
   return (
     <Form {...form}>
       <FormWizardContext.Provider
@@ -90,6 +110,7 @@ export function FormWizardProvider({
           isFirstStep,
           isLastStep,
           getFormValues: form.getValues,
+          restoreFormData,
         }}
       >
         {children}

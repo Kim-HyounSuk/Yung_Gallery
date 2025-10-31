@@ -128,7 +128,7 @@ export default function BusinessInSaudiPreviewPage() {
       <div className="z-10 flex gap-3 p-4 md:px-[50px]">
         <Button
           variant="outline"
-          onClick={() => router.back()}
+          onClick={() => router.push('/application/business-in-saudi')}
           disabled={isSubmit}
           className="text-body-lg! h-(--h-md) flex-1 px-(--px-lg) py-(--py-lg) font-semibold"
         >
