@@ -1,10 +1,6 @@
 import { FormConfig } from '@/type/application'
 import { businessInSaudiFormSchema } from '@/type/application/business-in-saudi'
-import {
-  AdditionalStep,
-  CompanyInfoStep,
-  InterestAreaStep,
-} from '../_components'
+import { CompanyInfoStep, InterestAreaStep } from '../_components'
 
 export const businessInSaudiConfig: FormConfig = {
   id: 'business-in-saudi',
@@ -20,13 +16,7 @@ export const businessInSaudiConfig: FormConfig = {
       component: InterestAreaStep,
       fieldName: 'interestArea',
     },
-    {
-      id: 'additional',
-      component: AdditionalStep,
-      fieldName: 'additional',
-    },
   ],
-  submitEndpoint: '/api/application/business-in-saudi',
   defaultValues: {
     companyInfo: {
       companyName: '',

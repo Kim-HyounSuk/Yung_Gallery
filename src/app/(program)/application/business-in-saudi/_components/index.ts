@@ -1,6 +1,5 @@
 export * from './business-in-saudi-page'
 export * from './footer'
-export * from './form-step/additional-step'
 export * from './form-step/company-info-step'
 export * from './form-step/interest-area-step'
 export * from './header'
