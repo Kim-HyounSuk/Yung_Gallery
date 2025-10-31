@@ -58,7 +58,7 @@ export function useGeneratePreview(config: FormConfig) {
       }, 1000)
     } catch (error) {
       toast.error(
-        (error as Error).message || '미리보기 생성 중 오류가 발생했습니다.',
+        (error as Error).message || '미리보기 생성 중 오류가 발생했습니다',
       )
       console.error('Preview generation error:', error)
     } finally {
@@ -118,7 +118,7 @@ export function useSubmitEmail(config: FormConfig) {
       }
 
       // 성공
-      toast.success('성공적으로 제출되었습니다.')
+      toast.success('성공적으로 제출되었습니다')
 
       // store 초기화
       usePreviewStore.setState({
@@ -132,7 +132,7 @@ export function useSubmitEmail(config: FormConfig) {
       })
     } catch (error) {
       toast.error(
-        (error as Error).message || '메일 발송 중 오류가 발생했습니다.',
+        (error as Error).message || '메일 발송 중 오류가 발생했습니다',
       )
       console.error('Email submit error:', error)
     } finally {
