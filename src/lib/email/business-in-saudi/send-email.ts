@@ -17,7 +17,6 @@ interface Props {
 
 export async function sendEmail({ formData, attachments, emailHTML }: Props) {
   try {
-    console.log('send mail:', formData)
     // 1. 수신 이메일 중복 제거를 위한 Set 사용
     const recipientEmail = new Set<string>()
     const recipients: Manager[] = []
