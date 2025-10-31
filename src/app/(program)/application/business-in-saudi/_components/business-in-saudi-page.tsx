@@ -3,8 +3,8 @@
 import { FormWizard } from '@/components/application'
 import { useFormWizard } from '@/components/application/form-wizard/form-wizard.context'
 import { usePreviewStore } from '@/store/application'
-import { businessInSaudiConfig } from '../_config'
 import { useEffect } from 'react'
+import { businessInSaudiConfig } from '../_config'
 
 interface Props {
   header: React.ReactNode
@@ -24,7 +24,7 @@ function BusinessInSaudiFormContent({ header, footer, watermark }: Props) {
   }, [formData, restoreFormData])
 
   return (
-    <div className="relative mx-auto flex w-full max-w-[850px] flex-1 flex-col gap-4 pb-4 shadow-xl md:my-8 md:rounded-lg">
+    <>
       <div className="sticky top-0 z-20">
         {header}
         <FormWizard.StepBar />
@@ -33,14 +33,18 @@ function BusinessInSaudiFormContent({ header, footer, watermark }: Props) {
       <FormWizard.Nav />
       {footer}
       {watermark}
-    </div>
+    </>
   )
 }
 
 export function BusinessInSaudiForm({ header, footer, watermark }: Props) {
   return (
     <FormWizard config={businessInSaudiConfig}>
-      <BusinessInSaudiFormContent header={header} footer={footer} watermark={watermark} />
+      <BusinessInSaudiFormContent
+        header={header}
+        footer={footer}
+        watermark={watermark}
+      />
     </FormWizard>
   )
 }
