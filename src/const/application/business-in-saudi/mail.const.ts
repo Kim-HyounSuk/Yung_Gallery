@@ -1,14 +1,6 @@
-type Manager = {
-  email: string
-  name: string
-  isSuper?: boolean // 최고 담당자 여부
-}
+import { Manager, ManagerMap } from '@/type/application'
 
-type ManagerMapping = {
-  [key: string]: Manager[] // 관심분야 ID별 담당자 배열
-}
-
-export const MANAGER_MAPPING: ManagerMapping = {
+export const MANAGER_MAP: ManagerMap = {
   partnership: [{ email: 'vanlan6499@gmail.com', name: '파트너십 담당자' }],
   license: [{ email: 'vanlan6499@gmail.com', name: '라이센스 담당자' }],
   export: [{ email: 'vanlan6499@gmail.com', name: '해외유통 담당자' }],

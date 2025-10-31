@@ -12,18 +12,18 @@ import {
   Text,
 } from '@react-email/components'
 
-type BusinessInSaudiEmailProps = {
+interface Props {
   formData: BusinessInSaudiFormData
   selectedInterestAreas: string[] // 관심분야 labels
   selectedSubItems: string[] // 세부항목 labels
 }
 
-export const BusinessInSaudiEmail = ({
+export const EmailTemplate = ({
   formData,
   selectedInterestAreas,
   selectedSubItems,
-}: BusinessInSaudiEmailProps) => {
-  const { companyInfo, additional } = formData
+}: Props) => {
+  const { companyInfo } = formData
 
   return (
     <Html lang="ko">
@@ -89,20 +89,6 @@ export const BusinessInSaudiEmail = ({
                   <Text style={value}>{companyInfo.foundingYear}</Text>
                 </td>
               </tr>
-              {companyInfo.documentUploads &&
-                companyInfo.documentUploads.length > 0 && (
-                  <tr>
-                    <td width="30%" style={labelCell}>
-                      <Text style={label}>첨부 문서</Text>
-                    </td>
-                    <td width="70%" style={valueCell}>
-                      <Text style={value}>
-                        {companyInfo.documentUploads.length}개의 파일이
-                        첨부되었습니다.
-                      </Text>
-                    </td>
-                  </tr>
-                )}
             </table>
           </Section>
 
@@ -141,40 +127,6 @@ export const BusinessInSaudiEmail = ({
             })}
           </Section>
 
-          {/* 추가 정보 */}
-          {additional && (
-            <Section style={section}>
-              <Heading style={h2}>추가 정보</Heading>
-
-              <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
-                <tr>
-                  <td width="30%" style={labelCell}>
-                    <Text style={label}>사우디 진출 예상 시기</Text>
-                  </td>
-                  <td width="70%" style={valueCell}>
-                    <Text style={value}>{additional.expectTimeline}</Text>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="30%" style={labelCell}>
-                    <Text style={label}>현재 투자 단계</Text>
-                  </td>
-                  <td width="70%" style={valueCell}>
-                    <Text style={value}>{additional.curFundStage}</Text>
-                  </td>
-                </tr>
-              </table>
-            </Section>
-          )}
-
-          {/* 기타 문의 */}
-          {additional?.comment && (
-            <Section style={section}>
-              <Heading style={h2}>기타 문의</Heading>
-              <Text style={commentText}>{additional.comment}</Text>
-            </Section>
-          )}
-
           {/* Footer */}
           <Section style={footer}>
             <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
@@ -204,8 +156,6 @@ export const BusinessInSaudiEmail = ({
   )
 }
 
-export default BusinessInSaudiEmail
-
 // Styles
 const main = {
   fontFamily:
@@ -217,7 +167,8 @@ const main = {
 }
 
 const container = {
-  maxWidth: '800px',
+  maxWidth: '600px',
+  minWidth: '600px',
   margin: '0 auto',
   backgroundColor: '#ffffff',
   width: '100%',
