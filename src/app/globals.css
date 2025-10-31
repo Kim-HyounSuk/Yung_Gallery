@@ -17,16 +17,16 @@
   --font-sans: var(--font-pretendard);
 
   /* === Point 컬러 팔레트 === */
-  --color-point-50: #ebe5fe;
-  --color-point-100: #ddd6fe;
-  --color-point-200: #c4b5fd;
-  --color-point-300: #a78bfa;
-  --color-point-400: #8b5cf6;
-  --color-point-500: #6d28d9;
-  --color-point-600: #5b21b6;
-  --color-point-700: #4c1d95;
-  --color-point-800: #3b1574;
-  --color-point-900: #2c0e56;
+  --color-point-50: #f5f6fa;
+  --color-point-100: #e4e6f3;
+  --color-point-200: #c4c9e4;
+  --color-point-300: #8990c0;
+  --color-point-400: #505991;
+  --color-point-500: #2d3364;
+  --color-point-600: #252b53;
+  --color-point-700: #1e2241;
+  --color-point-800: #171a30;
+  --color-point-900: #101220;
 
   /* === Gray 컬러 팔레트 === */
   --color-gray-100: #f7f8fa;
@@ -143,24 +143,24 @@
   --py-sm: 8px;
 
   --radius: 0.625rem;
-  --background: #ddd6fe;
-  --foreground: #0a0b0d;
+  --background: #c4c9e4;
+  --foreground: #101220;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #6d28d9;
-  --primary-foreground: #fff;
-  --secondary: #c4b5fd;
-  --secondary-foreground: #fff;
-  --muted: #eaebed;
+  --primary: #2d3364;
+  --primary-foreground: #f5f6fa;
+  --secondary: #505991;
+  --secondary-foreground: #101220;
+  --muted: #8990c0;
   --muted-foreground: #73787e;
-  --accent: #5b21b6;
-  --accent-foreground: #fff;
+  --accent: #252b53;
+  --accent-foreground: #f5f6fa;
   --destructive: #ff3e5b;
-  --border: #a78bfa;
-  --input: #eaebed;
-  --ring: #6d28d9;
+  --border: #8990c0;
+  --input: #505991;
+  --ring: #252b53;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -230,4 +230,33 @@
 /* Chrome, Safari 등 WebKit 브라우저용 */
 .scroll-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* 탭 화살표 애니메이션 */
+@keyframes slide-left {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes slide-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-slide-left {
+  animation: slide-left 1.5s ease-in-out infinite;
+}
+
+.animate-slide-right {
+  animation: slide-right 1.5s ease-in-out infinite;
 }
