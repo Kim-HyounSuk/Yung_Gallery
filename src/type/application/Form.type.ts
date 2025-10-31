@@ -22,6 +22,5 @@ export interface FormConfig<T extends FormData = FormData> {
   id: string
   schema: ZodType<T, T>
   steps: FormStep<T>[]
-  submitEndpoint: string
   defaultValues: UseFormProps<T>['defaultValues']
 }
