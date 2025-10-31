@@ -1,11 +1,10 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { FileDoc } from '@/type/application'
-import { CheckCircle2, Loader2, X } from 'lucide-react'
+import { CheckCircle2, X } from 'lucide-react'
 
 interface Props {
-  file: FileDoc
+  file: File
   index: number
   onRemove: (index: number) => void
   formatFileSize: (bytes: number) => string
@@ -22,11 +21,7 @@ export function FilePreviewItem({
       <div className="flex min-w-0 flex-1 items-center">
         {/* 상태 아이콘 */}
         <div className="mr-3 shrink-0">
-          {file.uploading ? (
-            <Loader2 className="text-primary h-5 w-5 animate-spin" />
-          ) : (
-            <CheckCircle2 className="text-primary h-5 w-5" />
-          )}
+          <CheckCircle2 className="text-primary h-5 w-5" />
         </div>
 
         {/* 파일 정보 */}

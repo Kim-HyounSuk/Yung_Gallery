@@ -1,16 +1,15 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { FileDoc } from '@/type/application'
 import { FilePreviewItem } from './file-preview-item'
 
 interface Props {
-  files: FileDoc[]
+  files: File[]
   maxFiles: number
   maxTotalSize: number
   onRemove: (index: number) => void
   onRemoveAll: () => void
-  getTotalSize: (files: FileDoc[]) => number
+  getTotalSize: (files: File[]) => number
   formatFileSize: (bytes: number) => string
 }
 

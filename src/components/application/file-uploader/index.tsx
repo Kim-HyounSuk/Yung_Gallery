@@ -6,22 +6,21 @@ import {
   MAX_TOTAL_SIZE,
 } from '@/const/application'
 import {
-  fileToBase64,
   formatFileSize,
   getTotalSize,
   validateFile,
   validateFileCount,
   validateTotalSize,
 } from '@/lib/application'
-import { FileDoc, FileUploaderConfig } from '@/type/application'
+import { FileUploaderConfig } from '@/type/application'
 import { useState } from 'react'
 import { FileDropZone } from './file-drop-zone'
 import { FileList } from './file-list'
 
 interface Props extends FileUploaderConfig {
   id?: string
-  value: FileDoc[]
-  onChange: (files: FileDoc[]) => void
+  value: File[]
+  onChange: (files: File[]) => void
   onError: (msg: string) => void
 }
 
@@ -49,49 +48,25 @@ export function FileUploader({
     }
 
     try {
-      // 임시로 uploading 상태 파일 추가
-      const tempFiles = Array.from(files).map((file) => ({
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        base64: '',
-        uploading: true,
-        uploaded: false,
-      }))
+      const fileArray = Array.from(files)
 
-      onChange([...value, ...tempFiles])
-
-      const newDocuments = await Promise.all(
-        Array.from(files).map(async (file) => {
-          // 파일 검증
-          const validationError = validateFile(
-            file,
-            maxFileSize,
-            acceptedTypes,
-            formatFileSize,
-          )
-          if (validationError) {
-            throw new Error(validationError)
-          }
-
-          // 파일을 base64로 변환
-          const base64 = await fileToBase64(file)
-
-          return {
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            base64,
-            uploading: false,
-            uploaded: true,
-          }
-        }),
-      )
+      // 파일 검증
+      for (const file of fileArray) {
+        const validationError = validateFile(
+          file,
+          maxFileSize,
+          acceptedTypes,
+          formatFileSize,
+        )
+        if (validationError) {
+          throw new Error(validationError)
+        }
+      }
 
       // 전체 용량 체크
       const totalSizeError = validateTotalSize(
         value,
-        newDocuments,
+        fileArray,
         maxTotalSize,
         getTotalSize,
         formatFileSize,
@@ -100,11 +75,9 @@ export function FileUploader({
         throw new Error(totalSizeError)
       }
 
-      // 업로드 완료된 파일로 업데이트
-      onChange([...value, ...newDocuments])
+      // 파일 추가
+      onChange([...value, ...fileArray])
     } catch (error) {
-      // 에러 발생 시 임시 파일 제거
-      onChange(value)
       onError(
         error instanceof Error ? error.message : '파일 업로드에 실패했습니다',
       )
