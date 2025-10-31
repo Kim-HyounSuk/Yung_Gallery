@@ -1,1 +1,1 @@
-export * from './file-upload.utill'
+export * from './file.utill'

@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useSubmitApplication } from '@/hook/application'
+import { useGeneratePreview } from '@/hook/application'
 import { FormConfig } from '@/type/application'
 import clsx from 'clsx'
 import { useState } from 'react'
@@ -26,10 +26,17 @@ export function FormWizardRoot({ children, config }: FormWizardRootProps) {
 }
 
 export function FormWizardNav() {
-  const { config, goToNext, goToPrev, curStep, isFirstStep, isLastStep } =
-    useFormWizard()
+  const {
+    config,
+    goToNext,
+    goToPrev,
+    curStep,
+    isFirstStep,
+    isLastStep,
+    getFormValues,
+  } = useFormWizard()
   const { formState } = useFormContext()
-  const { submit, isSubmit } = useSubmitApplication(config)
+  const { generatePreview, isSubmit } = useGeneratePreview(config)
   const [isDialog, setIsDialog] = useState(false)
 
   const handleNext = async () => {
@@ -50,7 +57,8 @@ export function FormWizardNav() {
   }
 
   const handleSubmit = async () => {
-    await submit()
+    const formValues = getFormValues()
+    await generatePreview(formValues)
     setIsDialog(false)
   }
 

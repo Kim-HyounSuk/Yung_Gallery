@@ -1,7 +1,7 @@
 'use client'
 
 import { Form } from '@/components/ui/form'
-import { FormConfig, FormStep } from '@/type/application'
+import { FormConfig, FormData, FormStep } from '@/type/application'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createContext, useCallback, useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -15,6 +15,7 @@ interface FormWizardContextValue {
   goToStep: (idx: number) => void
   isFirstStep: boolean
   isLastStep: boolean
+  getFormValues: () => FormData
 }
 
 const FormWizardContext = createContext<FormWizardContextValue | null>(null)
@@ -88,6 +89,7 @@ export function FormWizardProvider({
           goToStep,
           isFirstStep,
           isLastStep,
+          getFormValues: form.getValues,
         }}
       >
         {children}
